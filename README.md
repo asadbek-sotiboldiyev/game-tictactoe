@@ -1,2 +1,2 @@
 # game-tictactoe
-Tic Tac Toe o'yini 
+Barchamizga ma'lum va mashur Tic Tac Toe o'yini.
