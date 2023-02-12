@@ -1,8 +1,8 @@
 '''
 #####################################
-#									#
+#                                   #
 #  Dasturchi: AsAdbEk_Sotiboldiyev  #
-#   								#
+#                                   #
 #####################################
 
 ========== Tic Tac Toe ==============
@@ -27,21 +27,18 @@ banner.grid(row=0,column=0,columnspan=2) #columnspan=2
 
 def game_function(button,mas,index,list_button):
 	global count,list_0,list_1,list_2,restart,players,main_menu
-	count+=1
-
-	# print(players)
-	
+	count+=1	
 	
 	if count%2==0:
 		button.config(bg="red",text="X",state=DISABLED)
 		mas[index]='x'
-		main_menu.config(bg="blue")
+		main_menu.config(bg="blue",text=players[1])
 	else:
 		button.config(bg="blue",text="O",state=DISABLED)
 		mas[index]='o'
-		main_menu.config(bg="red")
+		main_menu.config(bg="red",text=players[0])
 	winner=syntax(list_0,list_1,list_2)
-	if winner!=None:
+	if winner:
 		if winner=="x":
 			winner=players[0]
 			color="red"
@@ -53,7 +50,6 @@ def game_function(button,mas,index,list_button):
 		else:
 			color="cyan"
 			showinfo("NATIJA","O'YINDA G'OLIB ANIQLANMADI.\n DURRANG!!!")
-		# print(winner)
 
 		for i in list_button:
 			i.config(state=DISABLED,bg=color)
@@ -106,9 +102,8 @@ def game_place_f():
 	b9.config(command=lambda:game_function(b9,list_2,2,list_button))
 	restart=Button(root,text="RESTART",width=10,font=("mv boli",20),state=DISABLED,command=game_place_f)
 	restart.grid(row=1,column=0,pady=10)
-	main_menu=Button(root,width=10,bg="blue",font=("mv boli",20),state=DISABLED)
+	main_menu=Label(root,width=20,bg="blue",fg="white",text=players[1],font=("mv boli",25))
 	main_menu.grid(row=1,column=1)
-#game_place_f()
 
 #=============================
 
