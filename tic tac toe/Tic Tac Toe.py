@@ -3,6 +3,8 @@
 #                                   #
 #  Dasturchi: AsAdbEk_Sotiboldiyev  #
 #                                   #
+#    t.me/asadbek_sotiboldiyev      #
+#                                   #
 #####################################
 
 ========== Tic Tac Toe ==============
@@ -19,16 +21,19 @@ window.config(bg="green")
 window.title("Tic Tac Toe #AsAdbEk_Sotiboldiyev")
 color="aqua"
 
+# Asosiy Frame ni yaratamiz
 root=Frame(window,bg="green")
 root.pack(anchor=CENTER)
 
+# O'yin nomini ko'rsatuvchi banner
 banner=Label(root,bg="green",text="<< Tic Tac Toe >>",fon=("mv boli",40))
-banner.grid(row=0,column=0,columnspan=2) #columnspan=2
+banner.grid(row=0,column=0,columnspan=2)
 
 def game_function(button,mas,index,list_button):
+	"""O'yinning asosiy funksiyasi. O'yin qanday borayotganini syntex fayliga jo'natib turadi"""
 	global count,list_0,list_1,list_2,restart,players,main_menu
-	count+=1	
-	
+	count+=1
+	# Qaysi o'yinchining navbati kelganini aniqlaymiz
 	if count%2==0:
 		button.config(bg="red",text="X",state=DISABLED)
 		mas[index]='x'
@@ -37,8 +42,9 @@ def game_function(button,mas,index,list_button):
 		button.config(bg="blue",text="O",state=DISABLED)
 		mas[index]='o'
 		main_menu.config(bg="red",text=players[0])
-	winner=syntax(list_0,list_1,list_2)
-	if winner:
+	winner=syntax(list_0,list_1,list_2) #syntax moduliga o'yin natijasi yuborib turiladi
+	# G'olib aniqlanganini tekshiramiz
+	if winner!=None:
 		if winner=="x":
 			winner=players[0]
 			color="red"
@@ -51,6 +57,7 @@ def game_function(button,mas,index,list_button):
 			color="cyan"
 			showinfo("NATIJA","O'YINDA G'OLIB ANIQLANMADI.\n DURRANG!!!")
 
+		# Hamma tugmalar DISABLE(o'chirilgan) holatga o'tadi
 		for i in list_button:
 			i.config(state=DISABLED,bg=color)
 		restart.config(state=NORMAL)
@@ -58,6 +65,7 @@ def game_function(button,mas,index,list_button):
 
 
 def game_place_f():
+	"""O'yin bo'lib otadigan maydonni yaratamiz"""
 	global list_0,list_1,list_2,count,restart,registration,main_menu
 	registration.destroy()
 	
@@ -70,6 +78,7 @@ def game_place_f():
 	game_place=Frame(root,bg="black")
 	game_place.grid(row=2,column=0,padx=20,pady=20,columnspan=2)
 	
+	# tugmalar
 	b1=Button(game_place,font=("mv boli",55,"bold"),width=4,bg=color)
 	b1.grid(row=0,column=0,padx=3,pady=3)
 	b2=Button(game_place,font=("mv boli",55,"bold"),width=4,bg=color)
@@ -91,6 +100,7 @@ def game_place_f():
 	
 	list_button=[b1,b2,b3,b4,b5,b6,b7,b8,b9]
 	
+	# tugmalarga game_function() funksiyasini birkitirib chiqamiz
 	b1.config(command=lambda:game_function(b1,list_0,0,list_button))
 	b2.config(command=lambda:game_function(b2,list_0,1,list_button))
 	b3.config(command=lambda:game_function(b3,list_0,2,list_button))
@@ -110,6 +120,7 @@ def game_place_f():
 players=[]
 
 def start_function(btn,plyr,plyr_x='',plyr_o=''):
+	"""O'yinchilarni ro'yxatdan o'tkazib olamiz"""
 	global pl_count,start,players
 	
 	
@@ -127,6 +138,7 @@ def start_function(btn,plyr,plyr_x='',plyr_o=''):
 		start.config(state=NORMAL,bg="lightgreen")
 	
 def start_place():
+	"""O'yinchilar ro'yxatdan o'tishi uchun maydon"""
 	global pl_count,start,registration
 	pl_count=0
 	registration=Frame(root,bg="green",relief=SOLID,bd=3,pady=30)
@@ -148,8 +160,7 @@ def start_place():
 	
 	start=Button(registration,text=" BOSHLASH ",bg="pink",state=DISABLED,font=("mv boli",20,"bold"),command=game_place_f)
 	start.grid(row=2,column=0,columnspan=3,pady=20)
+# O'yinni ishga tushiramiz
 start_place()
-
-
 
 window.mainloop()
